@@ -4,4 +4,4 @@ project(Singleton3)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Factory main.cpp)
+add_executable(Abstract_Factory main.cpp)
