@@ -1,0 +1,3 @@
+/home/tuan/Documents/code/Design-Pattern/Singleton/Singleton4/build/CMakeFiles/edit_cache.dir
+/home/tuan/Documents/code/Design-Pattern/Singleton/Singleton4/build/CMakeFiles/rebuild_cache.dir
+/home/tuan/Documents/code/Design-Pattern/Singleton/Singleton4/build/CMakeFiles/Singleton4.dir

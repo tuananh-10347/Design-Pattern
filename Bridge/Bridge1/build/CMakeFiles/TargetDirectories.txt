@@ -1,0 +1,3 @@
+/home/tuan/Documents/code/Design-Pattern/Bridge/Bridge1/build/CMakeFiles/edit_cache.dir
+/home/tuan/Documents/code/Design-Pattern/Bridge/Bridge1/build/CMakeFiles/rebuild_cache.dir
+/home/tuan/Documents/code/Design-Pattern/Bridge/Bridge1/build/CMakeFiles/Factory.dir
