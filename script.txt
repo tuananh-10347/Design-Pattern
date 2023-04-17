@@ -8,3 +8,15 @@ Em gặp khó khăn gì khi trong công việc và xử lí ntn, Nếu sếp gia
 ENGLISH:
 tại sao bạn chọn cty tôi, học ở đâu, quê đâu, trường gì, ngành j
 tech: thích làm phần trên hay dưới, nguyện vọng trở thành gì, vị trí mong muốn, kế hoạch 5 năm, 1 năm muốn trở thành gì
+
+CppCheck là một công cụ phân tích tĩnh mã nguồn C++ để phát hiện các lỗi tiềm ẩn hoặc các lỗi cú pháp trong mã nguồn của bạn. Thông báo lỗi này chỉ ra rằng tham số 'color' trong hàm nên được truyền bằng tham chiếu const để tăng hiệu suất và tránh việc sao chép không cần thiết.
+
+Khi bạn truyền một tham số bằng giá trị (pass by value), một bản sao của đối tượng được tạo ra và truyền vào hàm. Điều này có thể gây tốn bộ nhớ và làm chậm chương trình của bạn, đặc biệt là nếu đối tượng là một đối tượng lớn như một chuỗi std::string.
+
+Thay vào đó, nếu bạn truyền tham số bằng tham chiếu const (pass by const reference), bạn chỉ truyền một tham chiếu đến đối tượng ban đầu, không tạo ra bất kỳ bản sao nào của đối tượng đó. Điều này giúp tăng hiệu suất và tránh việc sao chép không cần thiết.
+
+Vì vậy, để khắc phục cảnh báo này, bạn nên sửa đổi hàm để truyền tham số 'color' bằng tham chiếu const như sau:
+void drawShape(const std::string& color) {
+    // Function body
+}
+Chú ý rằng nếu bạn muốn chỉ đọc giá trị của 'color' trong hàm mà không thay đổi nó, bạn nên sử dụng từ khóa 'const' như được đề xuất trong thông báo lỗi.
