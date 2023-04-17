@@ -1,0 +1,3 @@
+/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/State/State1/build/CMakeFiles/Singleton.dir
+/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/State/State1/build/CMakeFiles/edit_cache.dir
+/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/State/State1/build/CMakeFiles/rebuild_cache.dir

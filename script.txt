@@ -1,0 +1,10 @@
+TECH:
+em làm gì với multi threading r
+tại sao dùng c++ /qt creator mà ko dùng java / android studio
+Desgin pattern nào thể hiện 4 t/c oop
+Ép kiểu,
+android{......}
+Em gặp khó khăn gì khi trong công việc và xử lí ntn, Nếu sếp giao cho bạn 1 input và bắt buộc trong ngày mai có output thì em làm sao.
+ENGLISH:
+tại sao bạn chọn cty tôi, học ở đâu, quê đâu, trường gì, ngành j
+tech: thích làm phần trên hay dưới, nguyện vọng trở thành gì, vị trí mong muốn, kế hoạch 5 năm, 1 năm muốn trở thành gì
