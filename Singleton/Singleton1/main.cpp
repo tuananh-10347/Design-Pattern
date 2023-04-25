@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+#define c v;
+
 class Singleton
 {
 private:
@@ -25,12 +27,9 @@ public:
         cout << "This is my parameter value address: " << ptr << endl;
     }
 };
-
 Singleton *Singleton::instance(nullptr);
-
 int main()
 {
-
     Singleton *singleton1 = Singleton::getInstance(1);
     Singleton *singleton2 = Singleton::getInstance(2);
     cout << ((singleton1 == singleton2) ? "singleton1 same singleton2" : "singleton1 differ singleton2") << endl;
@@ -39,4 +38,5 @@ int main()
     singleton2->showMessage();
 
     return 0;
+
 }

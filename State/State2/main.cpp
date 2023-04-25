@@ -8,6 +8,7 @@ public:
     virtual void draw() = 0;
     virtual void move(int x, int y) = 0;
     virtual void setColor(const string &color) = 0;
+    virtual ~Shape(){};
 };
 
 class Rectangle
@@ -19,6 +20,14 @@ private:
 
 public:
     Rectangle(int temp_x, int temp_y, int temp_height, int temp_width, Shape *temp_state) : x(temp_x), y(temp_y), height(temp_height), width(temp_width), state(temp_state){};
+    ~Rectangle()
+    {
+        if (state != nullptr)
+        {
+            delete state;
+            state = nullptr;
+        }
+    }
     void draw()
     {
         state->draw();
@@ -43,6 +52,14 @@ private:
 
 public:
     Circle(int temp_x, int temp_y, int temp_radius, Shape *temp_state) : x(temp_x), y(temp_y), radius(temp_radius), state(temp_state){};
+    ~Circle()
+    {
+        if (state != nullptr)
+        {
+            delete state;
+            state = nullptr;
+        }
+    }
     void draw()
     {
         state->draw();
@@ -99,6 +116,16 @@ public:
     }
 };
 
+template <typename T>
+void deletePtr(T *&ptr)
+{
+    if (ptr != nullptr)
+    {
+        delete ptr;
+        ptr = nullptr;
+    }
+}
+
 int main()
 {
     Shape *rectState = new RectangleState();
@@ -124,6 +151,16 @@ int main()
 
     cir->setColor("blue");
     cir->draw(); // blue
+
+    //deletePtr(rectState);
+    deletePtr(rect);
+    //deletePtr(circleState);
+    deletePtr(cir);
+
+    // delete rect;
+    // delete rectState;
+    // delete cir;
+    // delete circleState;
 
     return 0;
 }
