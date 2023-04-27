@@ -52,9 +52,17 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Model/main.cpp qrc_qml.cpp
+SOURCES       = ../Model/main.cpp \
+		../Model/myclass.cpp \
+		../Model/mystudent.cpp qrc_qml.cpp \
+		moc_myclass.cpp \
+		moc_mystudent.cpp
 OBJECTS       = main.o \
-		qrc_qml.o
+		myclass.o \
+		mystudent.o \
+		qrc_qml.o \
+		moc_myclass.o \
+		moc_mystudent.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -143,7 +151,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../Model/Model.pro  ../Model/main.cpp
+		../Model/Model.pro ../Model/myclass.h \
+		../Model/mystudent.h ../Model/main.cpp \
+		../Model/myclass.cpp \
+		../Model/mystudent.cpp
 QMAKE_TARGET  = Model
 DESTDIR       = 
 TARGET        = Model
@@ -352,7 +363,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Model/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Model/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Model/myclass.h ../Model/mystudent.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Model/main.cpp ../Model/myclass.cpp ../Model/mystudent.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -389,8 +401,19 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_myclass.cpp moc_mystudent.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_myclass.cpp moc_mystudent.cpp
+moc_myclass.cpp: ../Model/myclass.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include '/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/createModed/build-Model-Desktop-Debug/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/createModed/Model' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtQuick -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtQmlModels -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Model/myclass.h -o moc_myclass.cpp
+
+moc_mystudent.cpp: ../Model/mystudent.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include '/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/createModed/build-Model-Desktop-Debug/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/home/rut3hc/Documents/SSH VS CODE/Design-Pattern/createModed/Model' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtQuick -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtQmlModels -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Model/mystudent.h -o moc_mystudent.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -401,15 +424,28 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
-main.o: ../Model/main.cpp 
+main.o: ../Model/main.cpp ../Model/myclass.h \
+		../Model/mystudent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Model/main.cpp
+
+myclass.o: ../Model/myclass.cpp ../Model/myclass.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myclass.o ../Model/myclass.cpp
+
+mystudent.o: ../Model/mystudent.cpp ../Model/mystudent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mystudent.o ../Model/mystudent.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
+
+moc_myclass.o: moc_myclass.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_myclass.o moc_myclass.cpp
+
+moc_mystudent.o: moc_mystudent.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mystudent.o moc_mystudent.cpp
 
 ####### Install
 

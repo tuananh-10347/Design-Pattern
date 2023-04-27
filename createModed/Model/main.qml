@@ -6,6 +6,7 @@ Window {
     height: 480
     visible: true
     title: qsTr("Hello World")
+    //Tao model bang ListView cua QT/QML
     /*Item {
         width: 400
         height: 400
@@ -25,11 +26,11 @@ Window {
             }
         }
     }*/
-    Item {
+
+    //Tao model bang QStingList
+    /*Item {
         width: 400
         height: 400
-
-
         ListView {
             anchors.fill: parent
             model: myListStudent
@@ -37,5 +38,19 @@ Window {
                 text: modelData
             }
         }
+    }*/
+
+    //Tao model bang QObjectList
+    Item {
+        width: 400
+        height: 400
+        ListView {
+            anchors.fill: parent
+            model: myStudent
+            delegate: Text {
+                text: model.name + " " + model.class + " " + model.GPA
+            }
+        }
     }
+
 }
